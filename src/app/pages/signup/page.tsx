@@ -34,20 +34,18 @@ import { useState } from "react";
 const formSchema = z.object({
   username: z.string().min(2, "이름은 2글자 이상이어야 합니다."),
   email: z.string().email("올바른 이메일을 입력해주세요."),
-  phonenumber: z.string().regex(/^01\d{9}$/, "연락처는 11자리여야합니다."),
-  password: z.string().min(6, "비밀번호는 최소 6자 이상이여야 합니다."),
-  confirmpassword: z.string().min(6, "비밀번호는 최소 6자 이상이여야합니다."),
+  callnumber: z.string().regex(/^01\d{9}$/, "연락처는 11자리여야합니다."),
 });
 
 function ProfileForm() {
-  const [Validate, setValidate] = useState<boolean>(false);
+  const [isValidate, setIsValidate] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
       email: "",
-      phonenumber: "",
+      callnumber: "",
     },
   });
 
@@ -92,7 +90,7 @@ function ProfileForm() {
             />
             <FormField
               control={form.control}
-              name="phonenumber"
+              name="callnumber"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>연락처</FormLabel>
